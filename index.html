@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="echolog - Premium AI-first Digital, Marketing & Technology Agency. We transform brands with cutting-edge technology and strategic excellence.">
+    <meta name="keywords" content="digital agency, AI marketing, web development, brand strategy, technology consulting">
+    <meta name="author" content="echolog">
+    
+    <title>echolog | AI-First Digital & Technology Agency</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                        'display': ['Space Grotesk', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'echo': {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        },
+                        'dark': {
+                            900: '#0a0a0f',
+                            800: '#12121a',
+                            700: '#1a1a24',
+                            600: '#24242f',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { opacity: '0.5' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                    },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        /* ========================================
+           GLOBAL STYLES & SMOOTH SCROLLING
+        ======================================== */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #0a0a0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #12121a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #0ea5e9, #6366f1);
+            border-radius: 4px;
+        }
+        
+        /* ========================================
+           GRADIENT BACKGROUNDS
+        ======================================== */
+        .gradient-bg {
+            background: radial-gradient(ellipse at 50% 0%, rgba(14, 165, 233, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 80% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 40%),
+                        radial-gradient(ellipse at 20% 80%, rgba(14, 165, 233, 0.08) 0%, transparent 40%),
+                        #0a0a0f;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 50%, #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-text-accent {
+            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 50%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* ========================================
+           GLASSMORPHISM EFFECTS
+        ======================================== */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+            border-color: rgba(14, 165, 233, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(14, 165, 233, 0.2);
+        }
+        
+        /* ========================================
+           BUTTON STYLES
+        ======================================== */
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.5);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            border-color: rgba(14, 165, 233, 0.5);
+            background: rgba(14, 165, 233, 0.1);
+        }
+        
+        /* ========================================
+           ANIMATION UTILITIES
+        ======================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        
+        /* ========================================
+           TAB ANIMATIONS
+        ======================================== */
+        .tab-content {
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tab-content.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .tab-button {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #0ea5e9, #6366f1);
+            transition: width 0.3s ease;
+        }
+        
+        .tab-button.active::after,
+        .tab-button:hover::after {
+            width: 100%;
+        }
+        
+        /* ========================================
+           FLOATING ELEMENTS
+        ======================================== */
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .floating-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, transparent 70%);
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.25) 0%, transparent 70%);
+            bottom: 20%;
+            left: 5%;
+            animation-delay: -3s;
+        }
+        
+        /* ========================================
+           CUSTOM FORM STYLES
+        ======================================== */
+        .form-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(14, 165, 233, 0.5);
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+        }
+        
+        /* ========================================
+           MARQUEE ANIMATION
+        ======================================== */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        
+        .animate-marquee {
+            animation: marquee 30s linear infinite;
+        }
+        
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+        
+        /* ========================================
+           TECH GRID HOVER
+        ======================================== */
+        .tech-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .tech-card:hover::before {
+            opacity: 1;
+        }
+        
+        /* ========================================
+           NAVBAR SCROLL EFFECT
+        ======================================== */
+        .navbar-scrolled {
+            background: rgba(10, 10, 15, 0.9) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+
+        // ========================================
+        // NAVIGATION COMPONENT
+        // ========================================
+        const Navigation = () => {
+            const [isScrolled, setIsScrolled] = useState(false);
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setIsScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const navLinks = [
+                { href: '#services', label: 'Services' },
+                { href: '#work', label: 'Our Work' },
+                { href: '#capabilities', label: 'Capabilities' },
+                { href: '#about', label: 'About' },
+                { href: '#contact', label: 'Contact' },
+            ];
+
+            return (
+                <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'navbar-scrolled py-4' : 'py-6 bg-transparent'}`}>
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="flex items-center justify-between">
+                            {/* Logo */}
+                            <a href="#" className="flex items-center group">
+                                <span className="font-display font-bold text-2xl md:text-3xl gradient-text-accent">echolog</span>
+                            </a>
+
+                            {/* Desktop Navigation */}
+                            <div className="hidden lg:flex items-center gap-8">
+                                {navLinks.map((link) => (
+                                    <a
+                                        key={link.href}
+                                        href={link.href}
+                                        className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 relative group"
+                                    >
+                                        {link.label}
+                                        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-echo-500 to-indigo-500 transition-all duration-300 group-hover:w-full"></span>
+                                    </a>
+                                ))}
+                                <a
+                                    href="#contact"
+                                    className="btn-primary px-6 py-2.5 rounded-full text-sm font-semibold text-white"
+                                >
+                                    Let's Talk
+                                </a>
+                            </div>
+
+                            {/* Mobile Menu Button */}
+                            <button
+                                className="lg:hidden p-2"
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            >
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    {isMobileMenuOpen ? (
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    ) : (
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                    )}
+                                </svg>
+                            </button>
+                        </div>
+
+                        {/* Mobile Menu */}
+                        {isMobileMenuOpen && (
+                            <div className="lg:hidden mt-6 pb-6 border-t border-white/10 pt-6 animate-fade-in">
+                                <div className="flex flex-col gap-4">
+                                    {navLinks.map((link) => (
+                                        <a
+                                            key={link.href}
+                                            href={link.href}
+                                            className="text-lg font-medium text-gray-300 hover:text-white transition-colors"
+                                            onClick={() => setIsMobileMenuOpen(false)}
+                                        >
+                                            {link.label}
+                                        </a>
+                                    ))}
+                                    <a
+                                        href="#contact"
+                                        className="btn-primary px-6 py-3 rounded-full text-center font-semibold text-white mt-4"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                        Let's Talk
+                                    </a>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </nav>
+            );
+        };
+
+        // ========================================
+        // HERO SECTION
+        // ========================================
+        const Hero = () => {
+            return (
+                <section className="relative min-h-screen flex items-center gradient-bg overflow-hidden">
+                    {/* Floating Orbs */}
+                    <div className="floating-orb floating-orb-1"></div>
+                    <div className="floating-orb floating-orb-2"></div>
+                    
+                    {/* Grid Pattern Overlay */}
+                    <div className="absolute inset-0 opacity-[0.02]" style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                    }}></div>
+
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-32 pb-20">
+                        <div className="max-w-4xl">
+                            {/* Badge */}
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-8 animate-fade-in">
+                                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                <span className="text-sm font-medium text-gray-300">AI-First Digital Agency</span>
+                            </div>
+
+                            {/* Main Headline */}
+                            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] mb-6 animate-slide-up">
+                                <span className="gradient-text">Transform Your</span>
+                                <br />
+                                <span className="gradient-text-accent">Digital Presence</span>
+                            </h1>
+
+                            {/* Subheading */}
+                            <p className="text-xl sm:text-2xl text-gray-400 font-light mb-4 animate-slide-up stagger-1">
+                                AI × Growth × Brand Authority
+                            </p>
+
+                            <p className="text-lg text-gray-500 max-w-2xl mb-10 animate-slide-up stagger-2">
+                                We engineer digital experiences that convert curiosity into customers. 
+                                Strategic. Technical. Results-driven.
+                            </p>
+
+                            {/* CTAs */}
+                            <div className="flex flex-col sm:flex-row gap-4 animate-slide-up stagger-3">
+                                <a
+                                    href="#contact"
+                                    className="btn-primary px-8 py-4 rounded-full text-lg font-semibold text-white text-center"
+                                >
+                                    Let's Talk
+                                </a>
+                                <a
+                                    href="#work"
+                                    className="btn-secondary px-8 py-4 rounded-full text-lg font-semibold text-white text-center flex items-center justify-center gap-2"
+                                >
+                                    View Our Work
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                </a>
+                            </div>
+
+                            {/* Stats */}
+                            <div className="grid grid-cols-3 gap-4 sm:gap-8 mt-12 sm:mt-16 pt-12 sm:pt-16 border-t border-white/10 animate-slide-up stagger-4">
+                                <div>
+                                    <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold gradient-text-accent">50+</div>
+                                    <div className="text-xs sm:text-sm text-gray-500 mt-1">Clients Served</div>
+                                </div>
+                                <div>
+                                    <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold gradient-text-accent">3x</div>
+                                    <div className="text-xs sm:text-sm text-gray-500 mt-1">Avg. Growth</div>
+                                </div>
+                                <div>
+                                    <div className="font-display text-2xl sm:text-3xl md:text-4xl font-bold gradient-text-accent">24/7</div>
+                                    <div className="text-xs sm:text-sm text-gray-500 mt-1">AI Support</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Scroll Indicator */}
+                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+                        <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                    </div>
+                </section>
+            );
+        };
+
+        // ========================================
+        // SERVICES SECTION (TABBED INTERFACE)
+        // ========================================
+        const Services = () => {
+            const [activeTab, setActiveTab] = useState(0);
+
+            const services = [
+                {
+                    title: 'Social Media & Content',
+                    headline: 'Own Your Narrative, Dominate Feeds',
+                    bullets: [
+                        'Strategic content calendar development',
+                        'Platform-specific content optimization',
+                        'Community management and engagement',
+                        'Influencer collaboration strategies',
+                        'Analytics-driven content refinement'
+                    ],
+                    outcome: 'Build an audience that trusts, engages, and converts through strategic social presence.'
+                },
+                {
+                    title: 'Personal Branding',
+                    headline: 'Become the Authority in Your Space',
+                    bullets: [
+                        'Executive thought leadership positioning',
+                        'LinkedIn and professional network optimization',
+                        'Speaking and media opportunity development',
+                        'Content strategy for personal brands',
+                        'Reputation management and monitoring'
+                    ],
+                    outcome: 'Position yourself as the go-to expert that attracts opportunities and commands premium value.'
+                },
+                {
+                    title: 'Campaign Engineering',
+                    headline: 'Maximize Every Marketing Dollar',
+                    bullets: [
+                        'Data-driven campaign architecture',
+                        'Multi-channel attribution modeling',
+                        'A/B testing and conversion optimization',
+                        'ROI tracking and performance dashboards',
+                        'Budget allocation optimization'
+                    ],
+                    outcome: 'Launch campaigns that deliver measurable ROI and predictable growth trajectories.'
+                },
+                {
+                    title: 'Launch & Scale Strategy',
+                    headline: 'From Zero to Market Leader',
+                    bullets: [
+                        'Go-to-market strategy development',
+                        'Product-market fit validation',
+                        'Strategic pivot consulting',
+                        'Growth hacking and rapid scaling',
+                        'Market expansion playbooks'
+                    ],
+                    outcome: 'Navigate launches and pivots with confidence, backed by proven frameworks and strategic insight.'
+                },
+                {
+                    title: 'AI for Content & Sales',
+                    headline: 'Automate Revenue Generation',
+                    bullets: [
+                        'AI-powered content generation at scale',
+                        'Intelligent lead qualification and nurturing',
+                        'Personalized customer journey automation',
+                        'Predictive analytics for sales optimization',
+                        'Natural language processing for engagement'
+                    ],
+                    outcome: 'Transform your sales pipeline with AI that works 24/7, qualifying leads and closing conversations.'
+                },
+                {
+                    title: 'AI Features in Websites',
+                    headline: 'Intelligent Experiences, Higher Conversions',
+                    bullets: [
+                        'Smart chatbots with contextual understanding',
+                        'AI-driven recommendation engines',
+                        'Dynamic content personalization',
+                        'Automated customer support systems',
+                        'Behavioral analysis and optimization'
+                    ],
+                    outcome: 'Deliver personalized experiences that anticipate user needs and drive measurable engagement.'
+                },
+                {
+                    title: 'Web Development & Maintenance',
+                    headline: 'Build Digital Foundations That Scale',
+                    bullets: [
+                        'Custom web applications built with modern frameworks',
+                        'Performance-optimized, SEO-ready architecture',
+                        'Ongoing maintenance and security updates',
+                        'Scalable infrastructure that grows with your business',
+                        'Mobile-first responsive design standards'
+                    ],
+                    outcome: 'Launch faster, convert better, and maintain momentum with enterprise-grade web solutions.'
+                }
+            ];
+
+            return (
+                <section id="services" className="py-24 lg:py-32 relative">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        {/* Section Header */}
+                        <div className="max-w-3xl mb-16">
+                            <span className="text-echo-500 font-semibold text-sm uppercase tracking-wider">Our Services</span>
+                            <h2 className="font-display text-4xl lg:text-5xl font-bold mt-4 gradient-text">
+                                Strategic Solutions for Modern Brands
+                            </h2>
+                            <p className="text-gray-400 text-lg mt-4">
+                                Comprehensive digital services engineered to drive growth, build authority, and deliver measurable results.
+                            </p>
+                        </div>
+
+                        {/* Tabs Navigation */}
+                        <div className="flex flex-nowrap sm:flex-wrap gap-2 mb-12 overflow-x-auto pb-4 -mx-6 px-6 sm:mx-0 sm:px-0">
+                            {services.map((service, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setActiveTab(index)}
+                                    className={`tab-button px-5 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 ${
+                                        activeTab === index
+                                            ? 'bg-gradient-to-r from-echo-500 to-indigo-500 text-white'
+                                            : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white'
+                                    }`}
+                                >
+                                    {service.title}
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Tab Content */}
+                        <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12">
+                            {services.map((service, index) => (
+                                <div
+                                    key={index}
+                                    className={`tab-content ${activeTab === index ? 'active' : 'hidden'}`}
+                                >
+                                    <div className="grid lg:grid-cols-2 gap-12">
+                                        <div>
+                                            <h3 className="font-display text-3xl lg:text-4xl font-bold mb-6">
+                                                {service.headline}
+                                            </h3>
+                                            <ul className="space-y-4">
+                                                {service.bullets.map((bullet, bulletIndex) => (
+                                                    <li key={bulletIndex} className="flex items-start gap-4">
+                                                        <span className="mt-1.5 w-2 h-2 rounded-full bg-gradient-to-r from-echo-500 to-indigo-500 flex-shrink-0"></span>
+                                                        <span className="text-gray-300">{bullet}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div className="flex flex-col justify-center">
+                                            <div className="bg-gradient-to-br from-echo-500/10 to-indigo-500/10 rounded-2xl p-8 border border-white/5">
+                                                <div className="text-sm font-semibold text-echo-400 uppercase tracking-wider mb-3">
+                                                    Business Outcome
+                                                </div>
+                                                <p className="text-xl lg:text-2xl font-light text-white leading-relaxed">
+                                                    {service.outcome}
+                                                </p>
+                                            </div>
+                                            <a
+                                                href="#contact"
+                                                className="btn-primary mt-8 px-8 py-4 rounded-full text-center font-semibold text-white inline-block"
+                                            >
+                                                Discuss This Service
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ========================================
+        // OUR WORK / LOOKBOOK SECTION
+        // ========================================
+        const Work = () => {
+            const projects = [
+                {
+                    title: 'MIXI – Diet Soda for Gen Z',
+                    category: 'Brand Strategy & Design',
+                    problem: 'Goli soda brand launching a new line targeting Gen Z girls aged 16-24',
+                    solution: 'Full brand identity creation — can design, website layout, Instagram templates, playful brand tone, and go-to-market strategy',
+                    impact: 'Transformed Mixi from just another "zero-calorie" drink into a lifestyle vibe. Currently in pilot-testing mode.',
+                    testimonial: '"They understood our audience and made Mixi irresistible."',
+                    gradient: 'from-pink-500/20 to-rose-500/20'
+                },
+                {
+                    title: 'Myntra\'s 18th Birthday Bash',
+                    category: 'Campaign & Event Strategy',
+                    problem: 'Myntra needed to celebrate their 18th anniversary in a memorable, brand-defining way',
+                    solution: 'Ideated and executed the full celebration — 18 top customers, Pickleball session, CEO meet, fashion show, brand movie, influencer posts, PR tie-ups, 20+ social drops',
+                    impact: 'Turned a milestone into a coming-of-age film moment — not just a sale, but a brand experience.',
+                    testimonial: '"This wasn\'t an event. It was a story worth remembering."',
+                    gradient: 'from-orange-500/20 to-amber-500/20'
+                },
+                {
+                    title: 'Fashion Trend Analysis',
+                    category: 'Creative Direction',
+                    problem: 'Homegrown fashion label needed direction on trending patterns and colors',
+                    solution: 'Created visual moodboards based on trending patterns and colors in summer 2024',
+                    impact: 'Provided clear creative direction for seasonal collections.',
+                    testimonial: '"The moodboards captured exactly what we needed."',
+                    gradient: 'from-violet-500/20 to-purple-500/20'
+                },
+                {
+                    title: 'Project Red Kills',
+                    category: 'Artwork & Design',
+                    problem: 'Creating distinctive visual artwork for a streetwear drop',
+                    solution: 'Designed artwork using rappers and singers imagery, coordinated and overlaid onto Marlboro brand color pattern',
+                    impact: 'Bold, conversation-starting design that defined the drop\'s identity.',
+                    testimonial: '"The artwork became the entire campaign."',
+                    gradient: 'from-red-500/20 to-orange-500/20'
+                },
+                {
+                    title: 'Building a Gen Z Fashion Brand',
+                    category: 'Brand Strategy & Launch',
+                    problem: 'Digital influencer launching her fashion label with no brand infrastructure',
+                    solution: 'Led full branding and marketing — logo, packaging, website, launch strategy, PR influencer selection, social media buzz plan',
+                    impact: 'Built the brand\'s world from scratch. Launch next month, audience already anticipating.',
+                    testimonial: '"My vision finally has a voice. The audience is ready."',
+                    gradient: 'from-fuchsia-500/20 to-pink-500/20'
+                },
+                {
+                    title: 'Personal Brand Launch',
+                    category: 'Personal Branding',
+                    problem: 'Industry expert with no digital presence or authority positioning',
+                    solution: 'Complete personal brand buildout with LinkedIn strategy and thought leadership content',
+                    impact: '50K+ followers in 8 months, 3x consulting rate increase',
+                    testimonial: '"They made me the voice of my industry."',
+                    gradient: 'from-blue-500/20 to-cyan-500/20'
+                },
+                {
+                    title: 'AI Chatbot Integration',
+                    category: 'AI Solutions',
+                    problem: 'Customer support overwhelmed with repetitive queries',
+                    solution: 'Custom AI chatbot with natural language processing and CRM integration',
+                    impact: '70% reduction in support tickets, 24/7 instant response capability',
+                    testimonial: '"Our customers get answers instantly. Game changer."',
+                    gradient: 'from-emerald-500/20 to-teal-500/20'
+                }
+            ];
+
+            return (
+                <section id="work" className="py-24 lg:py-32 relative bg-dark-800/50">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        {/* Section Header */}
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-echo-500 font-semibold text-sm uppercase tracking-wider">Our Work</span>
+                            <h2 className="font-display text-4xl lg:text-5xl font-bold mt-4 gradient-text">
+                                Proof of Execution
+                            </h2>
+                            <p className="text-gray-400 text-lg mt-4">
+                                Real results from real partnerships. Every project tells a story of transformation.
+                            </p>
+                        </div>
+
+                        {/* Projects Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {projects.map((project, index) => (
+                                <div
+                                    key={index}
+                                    className={`glass-card rounded-2xl overflow-hidden group`}
+                                >
+                                    {/* Project Image Placeholder */}
+                                    <div className={`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center relative overflow-hidden`}>
+                                        <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 to-transparent"></div>
+                                        <span className="relative z-10 text-sm font-semibold text-white/80 px-4 py-2 bg-white/10 rounded-full backdrop-blur-sm">
+                                            {project.category}
+                                        </span>
+                                    </div>
+                                    
+                                    {/* Project Content */}
+                                    <div className="p-6">
+                                        <h3 className="font-display text-xl font-bold mb-4">{project.title}</h3>
+                                        
+                                        <div className="space-y-3 mb-4">
+                                            <div>
+                                                <span className="text-xs font-semibold text-gray-500 uppercase">Challenge</span>
+                                                <p className="text-sm text-gray-400">{project.problem}</p>
+                                            </div>
+                                            <div>
+                                                <span className="text-xs font-semibold text-gray-500 uppercase">Solution</span>
+                                                <p className="text-sm text-gray-400">{project.solution}</p>
+                                            </div>
+                                            <div>
+                                                <span className="text-xs font-semibold text-echo-400 uppercase">Impact</span>
+                                                <p className="text-sm text-white font-medium">{project.impact}</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <blockquote className="text-sm italic text-gray-500 border-l-2 border-echo-500 pl-4">
+                                            {project.testimonial}
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* CTA */}
+                        <div className="text-center mt-12">
+                            <a
+                                href="#contact"
+                                className="btn-secondary px-8 py-4 rounded-full text-lg font-semibold text-white inline-flex items-center gap-2"
+                            >
+                                Start Your Success Story
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ========================================
+        // TECH CAPABILITIES SECTION
+        // ========================================
+        const Capabilities = () => {
+            const technologies = [
+                {
+                    name: 'React',
+                    description: 'Building dynamic, component-driven user interfaces',
+                    icon: '⚛️'
+                },
+                {
+                    name: 'Tailwind CSS',
+                    description: 'Rapid UI development with utility-first styling',
+                    icon: '🎨'
+                },
+                {
+                    name: 'Web Design',
+                    description: 'Pixel-perfect, conversion-optimized designs',
+                    icon: '✨'
+                },
+                {
+                    name: 'AI Infrastructure',
+                    description: 'Enterprise-grade AI/ML system architecture',
+                    icon: '🧠'
+                },
+                {
+                    name: 'AI Chatbots',
+                    description: 'Intelligent conversational experiences',
+                    icon: '💬'
+                },
+                {
+                    name: 'AI Recommendations',
+                    description: 'Personalized content and product suggestions',
+                    icon: '🎯'
+                },
+                {
+                    name: 'AI for Sales',
+                    description: 'Automated lead qualification and nurturing',
+                    icon: '📈'
+                },
+                {
+                    name: 'Node.js',
+                    description: 'Scalable server-side applications and APIs',
+                    icon: '🟢'
+                },
+                {
+                    name: 'Flutter',
+                    description: 'Cross-platform mobile app development',
+                    icon: '📱'
+                },
+                {
+                    name: 'React Native',
+                    description: 'Native mobile experiences with React',
+                    icon: '📲'
+                },
+                {
+                    name: 'Streamlit',
+                    description: 'Rapid AI/ML application prototyping',
+                    icon: '🚀'
+                },
+                {
+                    name: 'Cloud Architecture',
+                    description: 'AWS, GCP, Azure infrastructure solutions',
+                    icon: '☁️'
+                }
+            ];
+
+            return (
+                <section id="capabilities" className="py-24 lg:py-32 relative">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        {/* Section Header */}
+                        <div className="text-center max-w-3xl mx-auto mb-16">
+                            <span className="text-echo-500 font-semibold text-sm uppercase tracking-wider">Tech Stack</span>
+                            <h2 className="font-display text-4xl lg:text-5xl font-bold mt-4 gradient-text">
+                                Engineering Excellence
+                            </h2>
+                            <p className="text-gray-400 text-lg mt-4">
+                                Modern technologies, battle-tested in production. We build with the best.
+                            </p>
+                        </div>
+
+                        {/* Tech Grid */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                            {technologies.map((tech, index) => (
+                                <div
+                                    key={index}
+                                    className="tech-card glass-card rounded-xl p-6 text-center group cursor-pointer"
+                                >
+                                    <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-110">
+                                        {tech.icon}
+                                    </div>
+                                    <h3 className="font-semibold text-white mb-1 sm:mb-2 text-sm sm:text-base">{tech.name}</h3>
+                                    <p className="text-xs sm:text-sm text-gray-500 group-hover:text-gray-400 transition-colors">
+                                        {tech.description}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ========================================
+        // OUR GOAL / MANIFESTO SECTION
+        // ========================================
+        const Manifesto = () => {
+            return (
+                <section id="about" className="py-24 lg:py-32 relative overflow-hidden">
+                    {/* Background Elements */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-dark-800/50 via-transparent to-dark-800/50"></div>
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-echo-500/10 to-indigo-500/10 rounded-full blur-[100px]"></div>
+
+                    <div className="max-w-5xl mx-auto px-6 lg:px-8 relative">
+                        <div className="text-center">
+                            <span className="text-echo-500 font-semibold text-sm uppercase tracking-wider">Our Mission</span>
+                            <h2 className="font-display text-4xl lg:text-5xl font-bold mt-4 mb-12 gradient-text">
+                                Why We Exist
+                            </h2>
+                            
+                            <blockquote className="relative">
+                                {/* Quote Mark */}
+                                <div className="absolute -top-8 -left-4 text-8xl text-echo-500/20 font-serif">"</div>
+                                
+                                <p className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-light leading-relaxed text-white">
+                                    With our cutting-edge technology and exceptional domain expertise, we empower enterprises to take their brand to new heights. We ignite your online presence with complete digital solutions—
+                                    <span className="gradient-text-accent font-medium">fostering connections</span>, 
+                                    <span className="gradient-text-accent font-medium"> driving results</span>, and helping you confidently 
+                                    <span className="gradient-text-accent font-medium"> seize opportunities</span>.
+                                </p>
+                                
+                                <div className="absolute -bottom-8 -right-4 text-8xl text-echo-500/20 font-serif rotate-180">"</div>
+                            </blockquote>
+
+                            <div className="mt-16 flex flex-wrap justify-center gap-8">
+                                <div className="text-center">
+                                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-echo-500/20 to-indigo-500/20 flex items-center justify-center mx-auto mb-3">
+                                        <svg className="w-8 h-8 text-echo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                    </div>
+                                    <div className="font-semibold text-white">Innovation</div>
+                                    <div className="text-sm text-gray-500">AI-First Approach</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-echo-500/20 to-indigo-500/20 flex items-center justify-center mx-auto mb-3">
+                                        <svg className="w-8 h-8 text-echo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                        </svg>
+                                    </div>
+                                    <div className="font-semibold text-white">Trust</div>
+                                    <div className="text-sm text-gray-500">Transparent Partnership</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="w-16 h-16 rounded-full bg-gradient-to-r from-echo-500/20 to-indigo-500/20 flex items-center justify-center mx-auto mb-3">
+                                        <svg className="w-8 h-8 text-echo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                        </svg>
+                                    </div>
+                                    <div className="font-semibold text-white">Results</div>
+                                    <div className="text-sm text-gray-500">Measurable Growth</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ========================================
+        // SOCIAL PROOF SECTION
+        // ========================================
+        const SocialProof = () => {
+            const clients = [
+                'TechCorp', 'GrowthLabs', 'ScaleUp', 'NextGen', 'InnovateCo',
+                'FutureBrand', 'DataDriven', 'DigitalFirst', 'SmartScale', 'PeakGrowth',
+                'VelocityAI', 'Momentum', 'Amplify', 'Catalyst', 'Pioneer'
+            ];
+
+            return (
+                <section className="py-24 lg:py-32 relative bg-dark-800/30 overflow-hidden">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        {/* Section Header */}
+                        <div className="text-center mb-16">
+                            <h2 className="font-display text-4xl lg:text-5xl font-bold gradient-text">
+                                Trusted by 50+ Clients
+                            </h2>
+                            <p className="text-gray-400 text-lg mt-4">
+                                Influencers & Business Owners Who Chose Excellence
+                            </p>
+                        </div>
+
+                        {/* Scrolling Logos */}
+                        <div className="relative">
+                            {/* Fade Edges */}
+                            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-dark-900 to-transparent z-10"></div>
+                            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-dark-900 to-transparent z-10"></div>
+                            
+                            <div className="flex animate-marquee">
+                                {[...clients, ...clients].map((client, index) => (
+                                    <div
+                                        key={index}
+                                        className="flex-shrink-0 mx-6"
+                                    >
+                                        <div className="glass px-8 py-4 rounded-full">
+                                            <span className="font-semibold text-gray-400 whitespace-nowrap">{client}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Trust Badges */}
+                        <div className="flex flex-wrap justify-center gap-8 mt-16">
+                            <div className="flex items-center gap-2 text-gray-500">
+                                <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span>Verified Results</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-500">
+                                <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span>Enterprise Ready</span>
+                            </div>
+                            <div className="flex items-center gap-2 text-gray-500">
+                                <svg className="w-5 h-5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                </svg>
+                                <span>Long-term Partnerships</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ========================================
+        // CONTACT / CONVERSION SECTION
+        // ========================================
+        const Contact = () => {
+            const [formData, setFormData] = useState({
+                name: '',
+                email: '',
+                company: '',
+                message: ''
+            });
+
+            const handleChange = (e) => {
+                setFormData({ ...formData, [e.target.name]: e.target.value });
+            };
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                // Form submission logic would go here
+                alert('Thank you for reaching out! We\'ll be in touch within 24 hours.');
+            };
+
+            return (
+                <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
+                    {/* Background */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-echo-500/5 to-dark-900"></div>
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-echo-500/50 to-transparent"></div>
+
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
+                        <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 items-center">
+                            {/* Left Column - Content */}
+                            <div>
+                                <span className="text-echo-500 font-semibold text-sm uppercase tracking-wider">Start a Conversation</span>
+                                <h2 className="font-display text-4xl lg:text-5xl xl:text-6xl font-bold mt-4 mb-6">
+                                    <span className="gradient-text">Let's Build</span>
+                                    <br />
+                                    <span className="gradient-text-accent">Something That Wins</span>
+                                </h2>
+                                <p className="text-gray-400 text-lg mb-8">
+                                    Ready to transform your digital presence? We're selective about the projects we take on because we commit fully to every partnership.
+                                </p>
+
+                                <div className="space-y-6">
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-12 h-12 rounded-full bg-echo-500/10 flex items-center justify-center flex-shrink-0">
+                                            <svg className="w-6 h-6 text-echo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-white">Email</div>
+                                            <a href="mailto:kushalmahendrasethia@gmail.com" className="text-gray-400 hover:text-echo-400 transition-colors text-sm sm:text-base break-all">kushalmahendrasethia@gmail.com</a>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-start gap-4">
+                                        <div className="w-12 h-12 rounded-full bg-echo-500/10 flex items-center justify-center flex-shrink-0">
+                                            <svg className="w-6 h-6 text-echo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div className="font-semibold text-white">Phone</div>
+                                            <a href="tel:+917048610626" className="text-gray-400 hover:text-echo-400 transition-colors">+91 7048610626</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Right Column - Form */}
+                            <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10">
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    <div>
+                                        <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Your Name</label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            name="name"
+                                            value={formData.name}
+                                            onChange={handleChange}
+                                            required
+                                            className="form-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500"
+                                            placeholder="John Doe"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleChange}
+                                            required
+                                            className="form-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500"
+                                            placeholder="john@company.com"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">Company / Brand</label>
+                                        <input
+                                            type="text"
+                                            id="company"
+                                            name="company"
+                                            value={formData.company}
+                                            onChange={handleChange}
+                                            className="form-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500"
+                                            placeholder="Your Company"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Tell Us About Your Project</label>
+                                        <textarea
+                                            id="message"
+                                            name="message"
+                                            value={formData.message}
+                                            onChange={handleChange}
+                                            required
+                                            rows={4}
+                                            className="form-input w-full px-4 py-3 rounded-xl text-white placeholder-gray-500 resize-none"
+                                            placeholder="What challenges are you facing? What does success look like?"
+                                        ></textarea>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="btn-primary w-full py-4 rounded-xl text-lg font-semibold text-white"
+                                    >
+                                        Let's Talk
+                                    </button>
+                                    <p className="text-xs text-gray-500 text-center">
+                                        By submitting, you agree to our privacy policy. We never share your data.
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // ========================================
+        // FOOTER
+        // ========================================
+        const Footer = () => {
+            return (
+                <footer className="py-16 border-t border-white/5">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-12">
+                            {/* Brand */}
+                            <div className="sm:col-span-2 md:col-span-2">
+                                <a href="#" className="flex items-center gap-3 mb-6">
+                                    <span className="font-display font-bold text-3xl gradient-text-accent">echolog</span>
+                                </a>
+                                <p className="text-gray-500 max-w-sm">
+                                    AI-first digital agency transforming brands with cutting-edge technology and strategic excellence.
+                                </p>
+                                <div className="flex flex-col gap-3 mt-6">
+                                    <div className="text-sm font-semibold text-gray-400 mb-1">Co-Founders</div>
+                                    <div className="flex flex-wrap gap-3">
+                                        <a href="https://www.linkedin.com/in/prerak-sethia-717774167" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-echo-500/20 transition-colors">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                            </svg>
+                                            <span className="text-sm text-gray-300">Prerak</span>
+                                        </a>
+                                        <a href="https://www.linkedin.com/in/kushal-sethia1/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-echo-500/20 transition-colors">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                            </svg>
+                                            <span className="text-sm text-gray-300">Kushal</span>
+                                        </a>
+                                        <a href="https://www.linkedin.com/in/riya-kochar-7539b6126/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-echo-500/20 transition-colors">
+                                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                            </svg>
+                                            <span className="text-sm text-gray-300">Riya</span>
+                                        </a>
+                                    </div>
+                                    <a href="https://www.instagram.com/sethia_kush?igsh=MTBkZDloYWppcGd5eA==" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-echo-500/20 transition-colors w-fit">
+                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                        </svg>
+                                        <span className="text-sm text-gray-300">Instagram</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Quick Links */}
+                            <div>
+                                <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+                                <ul className="space-y-3">
+                                    <li><a href="#services" className="text-gray-500 hover:text-white transition-colors">Services</a></li>
+                                    <li><a href="#work" className="text-gray-500 hover:text-white transition-colors">Our Work</a></li>
+                                    <li><a href="#capabilities" className="text-gray-500 hover:text-white transition-colors">Capabilities</a></li>
+                                    <li><a href="#about" className="text-gray-500 hover:text-white transition-colors">About</a></li>
+                                    <li><a href="#contact" className="text-gray-500 hover:text-white transition-colors">Contact</a></li>
+                                </ul>
+                            </div>
+
+                            {/* Contact */}
+                            <div>
+                                <h4 className="font-semibold text-white mb-4">Get in Touch</h4>
+                                <ul className="space-y-3">
+                                    <li><a href="mailto:kushalmahendrasethia@gmail.com" className="text-gray-500 hover:text-white transition-colors text-sm break-all">kushalmahendrasethia@gmail.com</a></li>
+                                    <li><a href="tel:+917048610626" className="text-gray-500 hover:text-white transition-colors text-sm">+91 7048610626</a></li>
+                                    <li className="text-gray-500 text-sm">echolog.in</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        {/* Bottom Bar */}
+                        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+                            <p className="text-gray-600 text-sm">
+                                © 2026 echolog. All rights reserved.
+                            </p>
+                            <div className="flex gap-6">
+                                <a href="#" className="text-gray-600 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                                <a href="#" className="text-gray-600 hover:text-white text-sm transition-colors">Terms of Service</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            );
+        };
+
+        // ========================================
+        // MAIN APP COMPONENT
+        // ========================================
+        const App = () => {
+            useEffect(() => {
+                // Scroll reveal animation
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        }
+                    });
+                }, observerOptions);
+
+                document.querySelectorAll('.reveal').forEach(el => {
+                    observer.observe(el);
+                });
+
+                return () => observer.disconnect();
+            }, []);
+
+            return (
+                <div className="min-h-screen bg-dark-900">
+                    <Navigation />
+                    <Hero />
+                    <Services />
+                    <Work />
+                    <Capabilities />
+                    <Manifesto />
+                    <SocialProof />
+                    <Contact />
+                    <Footer />
+                </div>
+            );
+        };
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
