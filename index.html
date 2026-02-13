@@ -576,6 +576,7 @@
                                         <a
                                             key={link.href}
                                             href={link.href}
+                                            onClick={(e) => { e.preventDefault(); document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: 'smooth' }); }}
                                             className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 relative group"
                                         >
                                             {link.label}
@@ -618,7 +619,7 @@
                                             key={link.href}
                                             href={link.href}
                                             className="text-2xl font-display font-semibold text-gray-200 hover:text-white transition-colors"
-                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); setTimeout(() => { document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: 'smooth' }); }, 100); }}
                                         >
                                             {link.label}
                                         </a>
@@ -689,6 +690,7 @@
                                     </a>
                                     <a
                                         href="#spellbook"
+                                        onClick={(e) => { e.preventDefault(); document.getElementById('spellbook')?.scrollIntoView({ behavior: 'smooth' }); }}
                                         className="btn-secondary px-8 py-4 rounded-full text-lg font-semibold text-white text-center flex items-center justify-center gap-2"
                                     >
                                         View Our Playbook
@@ -943,6 +945,7 @@
                 { image: 'summer_fashion_pieces.png', spell: 'Aestiva Collectio', category: 'Creative Direction', desc: 'Curating summer fashion enchantments' },
                 { image: 'trend_analysis.png', spell: 'Divinus Trendicus', category: 'Market Research', desc: 'Divining tomorrow\'s trends from today\'s signals' },
                 { image: 'youtube_channels.png', spell: 'Vox Amplificare', category: 'Content Strategy', desc: 'Amplifying voices across YouTube\'s realm' },
+                { image: 'godrej.png', spell: 'Domus Magnificus', category: 'Real Estate Campaign', desc: 'Conjuring creative spells for Godrej\'s Yelahanka property — redirecting dream-seekers to their new home' },
             ];
 
             const goToSlide = useCallback((index) => {
@@ -1061,7 +1064,7 @@
                                                 </div>
                                                 
                                                 {/* Content */}
-                                                <div className="p-6 md:p-8 flex flex-col justify-center bg-gradient-to-br from-transparent to-rgba(212,167,84,0.02)">
+                                                <div className="p-6 md:p-8 flex flex-col justify-center" style={{ background: 'linear-gradient(to bottom right, transparent, rgba(212,167,84,0.02))' }}>
                                                     <div className="text-gold-400 text-xs font-wizard uppercase tracking-[0.2em] mb-2">
                                                         Spell #{String(currentSlide + 1).padStart(2, '0')}
                                                     </div>
@@ -1195,6 +1198,15 @@
                     impact: 'A brand that guests remember before they taste the food.',
                     image: 'restaurant_branding.png',
                     image2: 'logo_design.png',
+                },
+                {
+                    title: 'Godrej – Real Estate Campaign, Yelahanka',
+                    category: 'Performance Marketing',
+                    problem: 'Godrej needed to drive awareness and leads for an upcoming property launch in Yelahanka, Bangalore',
+                    solution: 'Designed performance creatives that redirect users to Godrej\'s website — a full-funnel flow from ad creative to landing page conversion',
+                    impact: 'Built a seamless creative-to-website pipeline driving qualified real estate leads.',
+                    image: 'godrej.png',
+                    image2: 'competitor_analysis.png',
                 },
                 {
                     title: 'Competitor & Trend Analysis',
