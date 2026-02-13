@@ -576,7 +576,6 @@
                                         <a
                                             key={link.href}
                                             href={link.href}
-                                            onClick={(e) => { e.preventDefault(); document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: 'smooth' }); }}
                                             className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 relative group"
                                         >
                                             {link.label}
@@ -619,7 +618,7 @@
                                             key={link.href}
                                             href={link.href}
                                             className="text-2xl font-display font-semibold text-gray-200 hover:text-white transition-colors"
-                                            onClick={(e) => { e.preventDefault(); setIsMobileMenuOpen(false); setTimeout(() => { document.getElementById(link.href.slice(1))?.scrollIntoView({ behavior: 'smooth' }); }, 100); }}
+                                            onClick={() => setIsMobileMenuOpen(false)}
                                         >
                                             {link.label}
                                         </a>
@@ -690,7 +689,6 @@
                                     </a>
                                     <a
                                         href="#spellbook"
-                                        onClick={(e) => { e.preventDefault(); document.getElementById('spellbook')?.scrollIntoView({ behavior: 'smooth' }); }}
                                         className="btn-secondary px-8 py-4 rounded-full text-lg font-semibold text-white text-center flex items-center justify-center gap-2"
                                     >
                                         View Our Playbook
@@ -946,6 +944,7 @@
                 { image: 'trend_analysis.png', spell: 'Divinus Trendicus', category: 'Market Research', desc: 'Divining tomorrow\'s trends from today\'s signals' },
                 { image: 'youtube_channels.png', spell: 'Vox Amplificare', category: 'Content Strategy', desc: 'Amplifying voices across YouTube\'s realm' },
                 { image: 'godrej.png', spell: 'Domus Magnificus', category: 'Real Estate Campaign', desc: 'Conjuring creative spells for Godrej\'s Yelahanka property — redirecting dream-seekers to their new home' },
+                { image: 'roselyn1.png', spell: 'Moda Creatio Totalis', category: 'Fashion Brand Launch', desc: 'Summoning an entire fashion empire from the void — brand identity, product strategy, and full-funnel marketing sorcery for Roselyn' },
             ];
 
             const goToSlide = useCallback((index) => {
@@ -1207,6 +1206,15 @@
                     impact: 'Built a seamless creative-to-website pipeline driving qualified real estate leads.',
                     image: 'godrej.png',
                     image2: 'competitor_analysis.png',
+                },
+                {
+                    title: 'Roselyn – Fashion Brand, Ground Up',
+                    category: 'Brand Strategy & Launch',
+                    problem: 'Building a fashion brand from scratch — no existing identity, audience, or market presence',
+                    solution: 'Led end-to-end brand creation: market research, target audience identification, brand positioning, visual identity, product development coordination, pricing strategy, and collection launches. Executed comprehensive marketing across social media, performance marketing, influencer collaborations, PR, and content production',
+                    impact: 'Took Roselyn from concept to a fully operational fashion brand with a consistent voice across every touchpoint.',
+                    image: 'roselyn1.png',
+                    image2: 'roselyn2.png',
                 },
                 {
                     title: 'Competitor & Trend Analysis',
